@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GENSENラジリク ドラッグページ</title>
+    <style>
+        #draggableText {
+            border: 1px solid #ccc;
+            padding: 10px;
+            cursor: move;
+            user-select: none; /* テキスト選択を無効にする */
+            margin-bottom: 20px; /* 下に余白を追加 */
+        }
+        #embeddedSite {
+            width: 100%; /* 幅を100%に設定 */
+            height: 500px; /* 高さを500pxに設定 */
+            border: 1px solid #ccc; /* 枠線を追加 */
+        }
+    </style>
+</head>
+<body>
+    <div id="draggableText" draggable="true">ここをドラッグできます</div>
+    
+    <script>
+        const draggableText = document.getElementById('draggableText');
+
+        draggableText.addEventListener('dragstart', (event) => {
+            event.dataTransfer.setData('text/plain', event.target.innerText);
+        });
+    </script>
+</body>
+</html>
