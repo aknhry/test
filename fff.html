@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GENSENラジリク ドラッグページ</title>
+    <style>
+        body {
+            margin: 0; /* マージンをリセット */
+            padding: 0; /* パディングをリセット */
+            font-family: Arial, sans-serif; /* フォントを設定 */
+        }
+        #draggableContainer {
+            display: flex; /* フレックスボックスを使用 */
+            flex-wrap: wrap; /* 行がいっぱいになったら次の行に回り込む */
+            border: 1px solid #ccc;
+            padding: 10px;
+            user-select: none; /* テキスト選択を無効にする */
+            margin: 10px; /* 周囲に余白を追加 */
+        }
+        .draggableText {
+            border: 1px solid #ccc;
+            padding: 10px;
+            cursor: move;
+            margin-right: 10px; /* 右に余白を追加 */
+            margin-bottom: 10px; /* 下に余白を追加 */
+            flex-shrink: 0; /* テキストが縮まないようにする */
+        }
+        #inputForm {
+            display: flex; /* フレックスボックスを使用 */
+            width: calc(100% - 20px); /* 横幅を100%にし、マージンを考慮 */
+            margin: 10px; /* 周囲に余白を追加 */
+            box-sizing: border-box; /* パディングを含めて幅を計算 */
+        }
+        #textInput {
+            flex: 1; /* 入力フィールドが残りのスペースを占有 */
+            padding: 10px; /* 内側の余白を追加 */
+            margin-right: 10px; /* ボタンとの間に余白を追加 */
+            font-size: 2em; /* テキストサイズを2倍に設定 */
+        }
+        #addTextButton {
+            padding: 10px; /* 内側の余白を追加 */
+            font-size: 1em; /* ボタンのテキストサイズを設定 */
+        }
+    </style>
+</head>
+<body>
+    <div id="draggableContainer"></div>
+    
+    <div id="inputForm">
+        <input type="text" id="textInput" placeholder="ここに文字を入力">
+        <button id="addTextButton">追加</button>
+    </div>
+
+    <script>
+        const draggableContainer = document.getElementById('draggableContainer');
+        const textInput = document.getElementById('textInput');
+        const addTextButton = document.getElementById('addTextButton');
+
+        addTextButton.addEventListener('click', () => {
+            const inputText = textInput.value.trim();
+            if (inputText) {
+                const newTextDiv = document.createElement('div');
+                newTextDiv.className = 'draggableText';
+                newTextDiv.draggable = true;
+                newTextDiv.innerText = inputText;
+
+                newTextDiv.addEventListener('dragstart', (event) => {
+                    event.dataTransfer.setData('text/plain', event.target.innerText);
+                });
+
+                draggableContainer.appendChild(newTextDiv); // ドラッグ可能なテキストを追加
+                textInput.value = ''; // 入力フィールドをクリア
+            }
+        });
+    </script>
+</body>
+</html>
