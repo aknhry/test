@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ドラッグ可能テキスト</title>
+    <title>GENSENラジリク ドラッグページ</title>
     <style>
         #draggableText {
             border: 1px solid #ccc;
@@ -21,19 +21,12 @@
 </head>
 <body>
     <div id="draggableText" draggable="true">ここをドラッグできます</div>
-
-    <!-- 埋め込みたいサイトのURLを指定 -->
-    <iframe id="embeddedSite" src="https://ssl.1242.com/aplform/form/aplform.php?fcode=m10" frameborder="0"></iframe>
     
     <script>
         const draggableText = document.getElementById('draggableText');
 
         draggableText.addEventListener('dragstart', (event) => {
             event.dataTransfer.setData('text/plain', event.target.innerText);
-        });
-
-        draggableText.addEventListener('dragend', (event) => {
-            alert('テキストがドラッグされました: ' + event.target.innerText);
         });
     </script>
 </body>
