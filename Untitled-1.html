@@ -82,16 +82,6 @@
     </script>
     <p>テキストを追加したら、右下のスイッチを押す
     </p>
-    <object data="https://ssl.1242.com/aplform/form/aplform.php?fcode=m10" width="600" height="400">
-        <p>このブラウザでは表示できません。</p>
-    </object>
-    <embed src="https://ssl.1242.com/aplform/form/aplform.php?fcode=m10" width="600" height="400" />
-
-    fetch('https://ssl.1242.com/aplform/form/aplform.php?fcode=m10')
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById('content').innerHTML = data.content;
-    });
     <iframe src="https://ssl.1242.com/aplform/form/aplform.php?fcode=m10" width="600" height="400"></iframe>
 </body>
 </html>
