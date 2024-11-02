@@ -20,12 +20,27 @@
         #drag_area {
             height: 30%;
             width: 100%;
-            border: 1px solid #ccc;
+            display: flex;
+            position: relative;
+        }
+        #drag_area_left, #drag_area_center, #drag_area_right {
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            flex-direction: column;
+        }
+        #drag_area_left {
+            width: 10%;
+        }
+        #drag_area_center {
+            width: 80%;
+            display: flex;
+            align-items: flex-start; /* 上詰めに変更 */
+            justify-content: flex-start; /* 左詰めに変更 */
+            flex-direction: row; /* 横並びにする */
+            flex-wrap: wrap; /* 改行を可能にする */
+        }
+        #drag_area_right {
+            width: 10%;
         }
         .draggableText {
             border: 1px solid #ccc;
@@ -35,16 +50,6 @@
             margin: 5px; /* テキスト間の余白 */
             text-align: center; /* 中央揃え */
             width: 150px; /* 幅を設定 */
-        }
-        #button_area {
-            width: 100%;
-            display: flex;
-            justify-content: space-between; /* ボタンを両端に配置 */
-            position: absolute; /* 絶対位置で配置 */
-            top: 10px; /* 上部からの余白 */
-        }
-        #button_left, #button_right {
-            padding: 5px 10px;
         }
         #browser_area {
             height: 60%;
@@ -85,12 +90,15 @@
     <div id="header">ヘッダー</div>
     
     <div id="drag_area">
-        <div id="text1" class="draggableText" draggable="true">テキスト1-1</div>
-        <div id="text2" class="draggableText" draggable="true">テキスト1-2</div>
-        <div id="text3" class="draggableText" draggable="true">テキスト1-3</div>
-        
-        <div id="button_area">
+        <div id="drag_area_left">
             <button id="button_left" onclick="prevList()">前へ</button>
+        </div>
+        <div id="drag_area_center">
+            <div id="text1" class="draggableText" draggable="true">テキスト1-1</div>
+            <div id="text2" class="draggableText" draggable="true">テキスト1-2</div>
+            <div id="text3" class="draggableText" draggable="true">テキスト1-3</div>
+        </div>
+        <div id="drag_area_right">
             <button id="button_right" onclick="nextList()">次へ</button>
         </div>
     </div>
@@ -101,7 +109,7 @@
         <div id="main_area">
             <div id="introduction_area">導入エリア</div>
             <div id="iframe_area">
-                <iframe src="https://ssl.1242.com/aplform/form/aplform.php?fcode=m10" width="100%" height="100%" frameborder="0"></iframe>
+                <iframe id="iframe" src="https://ssl.1242.com/aplform/form/aplform.php?fcode=m10" width="100%" height="100%" frameborder="0"></iframe>
             </div>
         </div>
 
@@ -109,16 +117,38 @@
     </div>
 
     <script>
-        const texts = [
-            ["テキスト1-1", "テキスト1-2", "テキスト1-3"], // リスト1
-            ["テキスト2-1", "テキスト2-2"],               // リスト2
-            ["テキスト3-1", "テキスト3-2", "テキスト3-3"], // リスト3
-            ["テキスト4-1"]                              // リスト4
+        // 変数
+        const radioname = "ラジオネーム";
+        const mailaddress = "メールアドレス";
+        const familyname = "性";
+        const firstname = "名";
+        const data = [
+            {
+                texts: [radioname, familyname, firstname, mailaddress],
+                introduction: "オールナイトニッポンMusic10",
+                iframeURL: "https://ssl.1242.com/aplform/form/aplform.php?fcode=m10"
+            },
+            {
+                texts: [radioname],
+                introduction: "HITS! THE TOWN（NACK5）",
+                iframeURL: "https://www.nack5.co.jp/message/270/"
+            },
+            {
+                texts: [radioname],
+                introduction: "Good Luck Mornig!（NACK5）",
+                iframeURL: "https://www.nack5.co.jp/message/53/"
+            },
+            {
+                texts: [radioname],
+                introduction: "GOGOMONZ（NACK5）",
+                iframeURL: "https://www.nack5.co.jp/message/2125/"
+            }
         ];
+        
         let currentListIndex = 0; // 現在のリストのインデックス
 
         // 初期テキストを設定
-        updateText();
+        updateContent();
 
         // 各テキストにドラッグイベントを追加
         document.querySelectorAll('.draggableText').forEach((element) => {
@@ -128,25 +158,29 @@
         });
 
         function nextList() {
-            currentListIndex = (currentListIndex + 1) % texts.length; // 次のリストインデックスを計算
-            updateText(); // テキストを更新
+            currentListIndex = (currentListIndex + 1) % data.length; // 次のリストインデックスを計算
+            updateContent(); // コンテンツを更新
         }
 
         function prevList() {
-            currentListIndex = (currentListIndex - 1 + texts.length) % texts.length; // 前のリストインデックスを計算
-            updateText(); // テキストを更新
+            currentListIndex = (currentListIndex - 1 + data.length) % data.length; // 前のリストインデックスを計算
+            updateContent(); // コンテンツを更新
         }
 
-        function updateText() {
+        function updateContent() {
             const draggableTexts = document.querySelectorAll('.draggableText');
             draggableTexts.forEach((element, index) => {
-                if (index < texts[currentListIndex].length) {
-                    element.innerText = texts[currentListIndex][index]; // 各テキストを更新
+                if (index < data[currentListIndex].texts.length) {
+                    element.innerText = data[currentListIndex].texts[index]; // 各テキストを更新
                     element.style.display = 'block'; // 表示
                 } else {
                     element.style.display = 'none'; // 非表示
                 }
             });
+
+            // 導入エリアとiframeのURLも更新
+            document.getElementById("introduction_area").innerText = data[currentListIndex].introduction; // 導入エリアを更新
+            document.getElementById("iframe").src = data[currentListIndex].iframeURL; // iframeのURLを更新
         }
     </script>
 </body>
