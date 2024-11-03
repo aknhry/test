@@ -17,6 +17,22 @@
             align-items: center;
             justify-content: center;
         }
+        #hamburger {
+            cursor: pointer;
+            margin-left: auto; /* 右端に配置 */
+            font-size: 24px; /* サイズ調整 */
+        }
+        #input_form {
+            position: absolute;
+            top: 10%;
+            right: 5%;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: none; /* 初期状態は非表示 */
+            z-index: 1000; /* 最前面にするためのz-index */
+        }
         #drag_area {
             height: 30%;
             width: 100%;
@@ -38,6 +54,9 @@
             justify-content: flex-start; /* 左詰めに変更 */
             flex-direction: row; /* 横並びにする */
             flex-wrap: wrap; /* 改行を可能にする */
+            background-image: url('your-image-url.jpg'); /* 背景画像のURLを指定 */
+            background-size: cover; /* 画像をカバーする */
+            background-position: center; /* 画像の位置を中央に設定 */
         }
         #drag_area_right {
             width: 10%;
@@ -87,7 +106,20 @@
     </style>
 </head>
 <body>
-    <div id="header">ヘッダー</div>
+    <div id="header">
+        ヘッダー
+        <div id="hamburger" onclick="toggleMenu()">☰</div>
+    </div>
+    
+    <div id="input_form" style="display: none;">
+        <form id="form">
+            <label for="name">名前:</label>
+            <input type="text" id="name" name="name"><br>
+            <label for="email">メール:</label>
+            <input type="email" id="email" name="email"><br>
+            <button type="button" onclick="submitForm()">送信</button>
+        </form>
+    </div>
     
     <div id="drag_area">
         <div id="drag_area_left">
@@ -126,22 +158,26 @@
             {
                 texts: [radioname, familyname, firstname, mailaddress],
                 introduction: "オールナイトニッポンMusic10",
-                iframeURL: "https://ssl.1242.com/aplform/form/aplform.php?fcode=m10"
+                iframeURL: "https://ssl.1242.com/aplform/form/aplform.php?fcode=m10",
+                backgroundImage: "url('C:/Users/Owner/Pictures/iCloud Photos/Photos/00.png')"
             },
             {
                 texts: [radioname],
                 introduction: "HITS! THE TOWN（NACK5）",
-                iframeURL: "https://www.nack5.co.jp/message/270/"
+                iframeURL: "https://www.nack5.co.jp/message/270/",
+                backgroundImage: "url('image2.jpg')"
             },
             {
                 texts: [radioname],
                 introduction: "Good Luck Mornig!（NACK5）",
-                iframeURL: "https://www.nack5.co.jp/message/53/"
+                iframeURL: "https://www.nack5.co.jp/message/53/",
+                backgroundImage: "url('image3.jpg')"
             },
             {
                 texts: [radioname],
                 introduction: "GOGOMONZ（NACK5）",
-                iframeURL: "https://www.nack5.co.jp/message/2125/"
+                iframeURL: "https://www.nack5.co.jp/message/2125/",
+                backgroundImage: "url('image4.jpg')"
             }
         ];
         
@@ -181,6 +217,20 @@
             // 導入エリアとiframeのURLも更新
             document.getElementById("introduction_area").innerText = data[currentListIndex].introduction; // 導入エリアを更新
             document.getElementById("iframe").src = data[currentListIndex].iframeURL; // iframeのURLを更新
+
+            // 背景画像を更新
+            document.getElementById("drag_area_center").style.backgroundImage = data[currentListIndex].backgroundImage;
+        }
+        function toggleMenu() {
+            const form = document.getElementById("input_form");
+            form.style.display = (form.style.display === "none" || form.style.display === "") ? "block" : "none";
+        }
+
+        function submitForm() {
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            alert(`名前: ${name}, メール: ${email}`);
+            // 必要に応じてここでフォームを送信する処理を追加
         }
     </script>
 </body>
