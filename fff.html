@@ -163,53 +163,55 @@
         let familyname = "";
         let firstname = "";
         let firstname_en = "";
+        let artistname = "";
+        let artistname_en = "";
+        let Sakurazaka46_newmain = "";
+        let Sakurazaka46_newbacks = "";
+        let slash_Sakurazaka46 = "";
+        let Sakurazaka46_newmain_en = "";
+        let Sakurazaka46_newbacks_en = "";
+        let slash_Sakurazaka46_en = "";
         const data = [
             {
-                texts: ["ラジオネーム", "性", "名", "メールアドレス"],
+                texts: ["Sakurazaka46_newmain", "Sakurazaka46_newbacks", "slash_Sakurazaka46", "ラジオネーム", "性", "名", "メールアドレス"],
                 introduction: "オールナイトニッポンMusic10",
                 iframeURL: "https://ssl.1242.com/aplform/form/aplform.php?fcode=m10",
                 backgroundImage: "url('C:/Users/Owner/Pictures/iCloud Photos/Photos/00.png')"
             },
             {
-                texts: ["ラジオネーム"],
+                texts: ["ラジオネーム", "アーティスト名", "Sakurazaka46_newmain", "Sakurazaka46_newbacks"],
                 introduction: "HITS! THE TOWN（NACK5）",
                 iframeURL: "https://www.nack5.co.jp/message/270/",
                 backgroundImage: "url('image2.jpg')"
             },
             {
-                texts: ["ラジオネーム"],
+                texts: ["ラジオネーム","Sakurazaka46_newmain", "Sakurazaka46_newbacks", "slash_Sakurazaka46"],
                 introduction: "Good Luck Mornig!（NACK5）",
                 iframeURL: "https://www.nack5.co.jp/message/53/",
                 backgroundImage: "url('image3.jpg')"
             },
             {
-                texts: ["ラジオネーム"],
+                texts: ["ラジオネーム","Sakurazaka46_newmain", "Sakurazaka46_newbacks", "slash_Sakurazaka46"],
                 introduction: "GOGOMONZ（NACK5）",
                 iframeURL: "https://www.nack5.co.jp/message/2125/",
                 backgroundImage: "url('image4.jpg')"
             },
             {
-                texts: ["メールアドレス", "First Name"],
+                texts: ["メールアドレス", "First Name", "アーティスト名（英）", "Sakurazaka46_newmain_en", "Sakurazaka46_newbacks_en"],
                 introduction: "WPVR NYC",
                 iframeURL: "https://docs.google.com/forms/d/e/1FAIpQLSfyVYf-rss5jZ0uA6RHIkb-Im180whM7I_U98HLnpu3w1C4cw/viewform",
                 backgroundImage: "url('C:/Users/Owner/Pictures/iCloud Photos/Photos/00.png')"
             },
             {
-                texts: [],
+                texts: ["アーティスト名（英）", "Sakurazaka46_newmain_en", "Sakurazaka46_newbacks_en"],
                 introduction: "OK Asia",
                 iframeURL: "https://docs.google.com/forms/d/e/1FAIpQLSe1yaIX9vTlkW8uVFqkF4ElCrsJ4R131b5lOQx7PlmwzYIaPg/viewform",
                 backgroundImage: "url('C:/Users/Owner/Pictures/iCloud Photos/Photos/00.png')"
             },
             {
-                texts: [],
+                texts: ["Sakurazaka46_newmain_en", "Sakurazaka46_newbacks_en", "slash_Sakurazaka46_en"],
                 introduction: "HOT106",
                 iframeURL: "https://docs.google.com/forms/d/e/1FAIpQLSfw02BKZZEk5KQF0uRNWZNHiYly3KocDVChDJsh7ZE_OFxg_A/viewform",
-                backgroundImage: "url('C:/Users/Owner/Pictures/iCloud Photos/Photos/00.png')"
-            },
-            {
-                texts: ["ラジオネーム"],
-                introduction: "Morning Moning!",
-                iframeURL: "https://www.air-g.co.jp//m-mail/",
                 backgroundImage: "url('C:/Users/Owner/Pictures/iCloud Photos/Photos/00.png')"
             }
         ];
@@ -259,6 +261,30 @@
                         case "First Name":
                             element.innerText = firstname_en || "First Name"; // 未入力時の表示
                             break;
+                        case "Sakurazaka46_newmain":
+                            element.innerText = Sakurazaka46_newmain || "I want tomorrow to come"; // 未入力時の表示
+                            break;
+                        case "Sakurazaka46_newbacks":
+                            element.innerText = Sakurazaka46_newbacks || "僕は僕を好きになれない"; // 未入力時の表示
+                            break;
+                        case "slash_Sakurazaka46":
+                            element.innerText = slash_Sakurazaka46 || "/櫻坂46"; // 未入力時の表示
+                            break;
+                        case "アーティスト名":
+                            element.innerText = artistname || "櫻坂46"; // 未入力時の表示
+                            break;
+                        case "アーティスト名（英）":
+                            element.innerText = artistname_en || "Sakurazaka46"; // 未入力時の表示
+                            break;
+                        case "Sakurazaka46_newmain_en":
+                            element.innerText = Sakurazaka46_newmain_en || "I want tomorrow to come"; // 未入力時の表示
+                            break;
+                        case "Sakurazaka46_newbacks_en":
+                            element.innerText = Sakurazaka46_newbacks_en || "Boku wa boku wo skininarenai"; // 未入力時の表示
+                            break;
+                        case "slash_Sakurazaka46_en":
+                            element.innerText = slash_Sakurazaka46_en || "/Sakurazaka46"; // 未入力時の表示
+                            break;
                         default:
                             element.innerText = currentData.texts[index]; // その他のテキスト
                     }
@@ -290,7 +316,8 @@
             familyname = inputText[2] || "";
             firstname = inputText[3] || "";
             firstname_en = inputText[4] || "";
-    
+            artistname = inputText[5] || "";
+
             // コンテンツを更新
             updateContent();
     
