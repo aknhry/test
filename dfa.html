@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>TVer リダイレクト</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    // TVerアプリのURLスキーム（実際のスキームは非公開の場合あり）
+    // 不明な場合は通常のWebリンクとフォールバックを使う
+    const tverAppUrl = 'tver://episodes/epuqp48gfq';
+    const webUrl = 'https://tver.jp/episodes/epuqp48gfq';
+
+    function openApp() {
+      // iOS/Android によって挙動が違うため、一定時間後にフォールバック
+      window.location = tverAppUrl;
+      setTimeout(() => {
+        window.location = webUrl;
+      }, 2000); // 2秒後にWebページにフォールバック
+    }
+
+    window.onload = openApp;
+  </script>
+</head>
+<body>
+  <p>アプリを開いています。開かない場合は <a href="https://tver.jp/episodes/epuqp48gfq">こちら</a> をタップしてください。</p>
+</body>
+</html>
