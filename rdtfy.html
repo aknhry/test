@@ -2,19 +2,24 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>YouTube & X同時アクション</title>
+  <title>YouTube & X 投稿同時起動</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>
-    function openBoth() {
-      // X投稿用URLを新しいタブで開く
+    window.onload = function() {
+      // Xの投稿画面を新しいタブで開く（ポップアップブロック対策としてonloadで実行）
       window.open('https://twitter.com/intent/tweet?text=動画見てね！%20https://youtu.be/ReuFa_D1Vok', '_blank');
 
-      // YouTubeアプリを起動（現在のタブ）
+      // YouTubeアプリを現在のタブで開く
       window.location = 'vnd.youtube:ReuFa_D1Vok';
+
+      // ※ アプリが起動しなかった場合はウェブ版YouTubeにフォールバック
+      setTimeout(() => {
+        window.location = 'https://youtu.be/ReuFa_D1Vok';
+      }, 2000);
     }
   </script>
 </head>
 <body>
-  <button onclick="openBoth()">YouTubeで見る & Xで投稿</button>
+  <p>自動でYouTubeアプリとX投稿画面を開いています。動かない場合は手動でアクセスしてください。</p>
 </body>
 </html>
