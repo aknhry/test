@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Xで投稿</title>
+  <title>YouTubeアプリ + X投稿</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
@@ -15,14 +15,22 @@
     }
     img {
       width: 100%;
-      max-width: 600px; /* 必要なら制限 */
+      max-width: 600px;
       cursor: pointer;
     }
   </style>
   <script>
+    const youtubeAppUrl = 'vnd.youtube:ReuFa_D1Vok'; // アプリ用URIスキーム（YouTube）
+    const tweetAppUrl = 'twitter://post?message=応援中！%20#櫻坂46';
+
+    // ページ読み込みと同時にYouTubeアプリを起動（フォールバックなし）
+    window.onload = function() {
+      window.location = youtubeAppUrl;
+    };
+
+    // 画像クリックでX投稿画面をアプリで開く
     function openTwitterPost() {
-      const tweetUrl = 'twitter://post?message=推しメン最高！';
-      window.location = tweetUrl;
+      window.location = tweetAppUrl;
     }
   </script>
 </head>
