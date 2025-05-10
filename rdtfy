@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>YouTube & X同時アクション</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    function openBoth() {
+      // X投稿用URLを新しいタブで開く
+      window.open('https://twitter.com/intent/tweet?text=動画見てね！%20https://youtu.be/ReuFa_D1Vok', '_blank');
+
+      // YouTubeアプリを起動（現在のタブ）
+      window.location = 'vnd.youtube:ReuFa_D1Vok';
+    }
+  </script>
+</head>
+<body>
+  <button onclick="openBoth()">YouTubeで見る & Xで投稿</button>
+</body>
+</html>
