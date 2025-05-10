@@ -2,24 +2,31 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>YouTube & X 投稿同時起動</title>
+  <title>Xで投稿</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #000;
+    }
+    img {
+      width: 100%;
+      max-width: 600px; /* 必要なら制限 */
+      cursor: pointer;
+    }
+  </style>
   <script>
-    window.onload = function() {
-      // Xの投稿画面を新しいタブで開く（ポップアップブロック対策としてonloadで実行）
-      window.open('https://twitter.com/intent/tweet?text=動画見てね！%20https://youtu.be/ReuFa_D1Vok', '_blank');
-
-      // YouTubeアプリを現在のタブで開く
-      window.location = 'vnd.youtube:ReuFa_D1Vok';
-
-      // ※ アプリが起動しなかった場合はウェブ版YouTubeにフォールバック
-      setTimeout(() => {
-        window.location = 'https://youtu.be/ReuFa_D1Vok';
-      }, 2000);
+    function openTwitterPost() {
+      const tweetUrl = 'twitter://post?message=推しメン最高！';
+      window.location = tweetUrl;
     }
   </script>
 </head>
 <body>
-  <p>自動でYouTubeアプリとX投稿画面を開いています。動かない場合は手動でアクセスしてください。</p>
+  <img src="https://example.com/your-image.jpg" alt="画像" onclick="openTwitterPost()">
 </body>
 </html>
