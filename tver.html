@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>TVerアプリで開く</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- iOS / Android App Link 情報 -->
+  <meta property="al:ios:url" content="tver://episode/epv5a6q9g7">
+  <meta property="al:ios:app_store_id" content="931749502">
+  <meta property="al:ios:app_name" content="TVer">
+
+  <meta property="al:android:url" content="tver://episode/epv5a6q9g7">
+  <meta property="al:android:package" content="jp.hamitv">
+  <meta property="al:android:app_name" content="TVer">
+
+  <meta property="og:title" content="TVer 公式エピソード">
+  <meta property="og:description" content="TVerアプリでエピソードを視聴しよう！">
+  <meta property="og:url" content="https://tver.jp/episodes/epv5a6q9g7">
+
+  <script>
+    window.onload = function () {
+      const start = Date.now();
+      const fallbackUrl = "https://tver.jp/episodes/epv5a6q9g7";
+      const deeplinkUrl = "tver://episode/epv5a6q9g7";
+
+      // アプリに遷移させる
+      location.href = deeplinkUrl;
+
+      // アプリが開けていなければWebページへ
+      setTimeout(() => {
+        const elapsed = Date.now() - start;
+        if (elapsed < 2000) {
+          location.href = fallbackUrl;
+        }
+      }, 1500);
+    };
+  </script>
+</head>
+<body>
+  <p>TVerアプリで開いています...</p>
+</body>
+</html>
