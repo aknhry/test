@@ -16,6 +16,25 @@
   <meta property="og:title" content="櫻坂46 TikTok公式動画">
   <meta property="og:description" content="TikTokアプリで櫻坂46の動画をチェック！">
   <meta property="og:url" content="https://www.tiktok.com/@sakurazaka46.officialtk/video/7503902864763309330">
+
+  <script>
+    window.onload = function () {
+      const start = Date.now();
+      const fallbackUrl = "https://www.tiktok.com/@sakurazaka46.officialtk/video/7503902864763309330?q=sakurazaka&t=1747558460603";
+      const deeplinkUrl = "tiktok://@sakurazaka46.officialtk/video/7503902864763309330";
+
+      // アプリに遷移させる
+      location.href = deeplinkUrl;
+
+      // 一定時間後にアプリが開けていなければWebにフォールバック
+      setTimeout(() => {
+        const elapsed = Date.now() - start;
+        if (elapsed < 2000) {
+          location.href = fallbackUrl;
+        }
+      }, 1500);
+    };
+  </script>
 </head>
 <body>
   <p>ATikTokアプリで開いています...</p>
